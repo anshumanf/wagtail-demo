@@ -1,0 +1,2 @@
+wagtail==1.13.1
+-e git://github.com/infoportugal/wagtail-modeltranslation@2b9fcc4fe247fa34d60a89c6fccd968668ad80e3#egg=wagtail-modeltranslation
