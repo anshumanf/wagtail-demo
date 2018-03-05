@@ -1,2 +1,4 @@
 wagtail==1.13.1
--e git://github.com/infoportugal/wagtail-modeltranslation@2b9fcc4fe247fa34d60a89c6fccd968668ad80e3#egg=wagtail-modeltranslation
+djangorestframework-camel-case==1.0b1
+elasticsearch==5.5.1
+-e git+git://github.com/nfletton/wagtailtinymce@f492a670c007f3c71ec42ac9549fcc67e952c0f1#egg=wagtailtinymce

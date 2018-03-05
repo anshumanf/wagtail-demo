@@ -40,12 +40,16 @@ INSTALLED_APPS = [
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
+    'wagtail.contrib.table_block',
+    'wagtail.contrib.modeladmin',
 
     'wagtail.api.v2',
     'rest_framework',
 
     'modelcluster',
     'taggit',
+
+    'wagtailtinymce',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -146,4 +150,67 @@ WAGTAIL_SITE_NAME = "mysite"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = 'http://gr-lxdesk81.mlp.com:9000'
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
+        # 'BACKEND': 'search.backends',
+        # 'ATOMIC_REBUILD': True,
+        'URLS': ['http://localhost:9200'],
+        'INDEX': 'wagtail',
+        'TIMEOUT': 5,
+        'OPTIONS': {},
+        'INDEX_SETTINGS': {
+            'settings': {
+                'analysis': {
+                    'analyzer': {
+                        'ngram_analyzer': {
+                            'type': 'custom',
+                            'tokenizer': 'lowercase',
+                            'filter': ['asciifolding', 'ngram'],
+                            'char_filter': ['html_strip'],
+                        },
+                        'edgengram_analyzer': {
+                            'type': 'custom',
+                            'tokenizer': 'lowercase',
+                            'filter': ['asciifolding', 'edgengram'],
+                            'char_filter': ['html_strip'],
+                        }
+                    },
+                    'tokenizer': {
+                        'ngram_tokenizer': {
+                            'type': 'nGram',
+                            'min_gram': 3,
+                            'max_gram': 15,
+                        },
+                        'edgengram_tokenizer': {
+                            'type': 'edgeNGram',
+                            'min_gram': 2,
+                            'max_gram': 15,
+                            'side': 'front'
+                        }
+                    },
+                    'filter': {
+                        'ngram': {
+                            'type': 'nGram',
+                            'min_gram': 3,
+                            'max_gram': 15
+                        },
+                        'edgengram': {
+                            'type': 'edgeNGram',
+                            'min_gram': 1,
+                            'max_gram': 15
+                        }
+                    }
+                }
+            }
+        },
+    }
+}
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        'WIDGET': 'home.rich_text.MyTinyMCE'
+    },
+}

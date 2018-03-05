@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+  <article>
+      {% for block in page.body %}
+          {% if block.block_type == 'heading' %}
+              <h1>{{ block.value }}</h1>
+          {% else %}
+              {% include_block block %}
+          {% endif %}
+      {% endfor %}
+  </article>
+{% endblock %}
+

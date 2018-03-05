@@ -25,7 +25,7 @@ urlpatterns = [
 
     url(r'^images/([^/]*)/(\d*)/([^/]*)/[^/]*$', ServeView.as_view(), name='wagtailimages_serve'),
 
-    url(r'^api/v2/', api_router.urls),
+    url(r'^api/', api_router.urls),
 ]
 
 urlpatterns += i18n_patterns(
